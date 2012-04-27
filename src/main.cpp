@@ -3,9 +3,9 @@
 #include <cstdlib>
 #include <GL/glfw.h>
 #include <GL/gl.h>
+#include <CoreMath/Vector4.hpp>
 
 #include "main.h"
-#include "Point.h"
 #include "BezierCurve.h"
 #include "BSplineCurve.h"
 #include "BSplineSurface.h"
@@ -33,7 +33,6 @@ BSplineCurve* bs = NULL;  //Standard b-spline.
 BSplineCurve* bw = NULL;  //Rational b-spline (modified weights).
 BSplineCurve* bk = NULL;  //Non-uniform b-spline (modified knot vector).
 BSplineCurve* bb = NULL;  //Non-uniform rational b-spline (NURBS, both of the above).
-BezierCurve* bc = NULL;   //Bezier curve of degree 3;
 
 int runlevel;
 int g_desiredFPS = 30;
@@ -43,9 +42,9 @@ int main(int argc, char** argv)
   initGL(WIDTH, HEIGHT);
   initCurves();
 
-  //BSplineSurface *s = new BSplineSurface(5, 5, 3, 3);
-  //s->generateSurface();
-  //delete s;
+  // BSplineSurface *s = new BSplineSurface(5, 5, 3, 3);
+  // s->generateSurface();
+  // delete s;
 
   mainLoop();
   return 0;
@@ -53,19 +52,16 @@ int main(int argc, char** argv)
 
 void initCurves()
 {
-  std::vector<Point*> p;
+  std::vector<CoreMath::Vector4> p;
 
-  p.push_back(new Point(100, 300, 0));
-  p.push_back(new Point(200, 200, 0));
-  p.push_back(new Point(400, 200, 0));
-  p.push_back(new Point(500, 400, 0));
+  p.push_back(CoreMath::Vector4(100, 300, 0));
+  p.push_back(CoreMath::Vector4(200, 200, 0));
+  p.push_back(CoreMath::Vector4(400, 200, 0));
+  p.push_back(CoreMath::Vector4(500, 400, 0));
 
-  bc = new BezierCurve(3);
-  bc->setControlPoints(p);
-  bc->generateCurve();
 
-  p.push_back(new Point(700, 300, 0));
-  p.push_back(new Point(500, 100, 0));
+  p.push_back(CoreMath::Vector4(700, 300, 0));
+  p.push_back(CoreMath::Vector4(500, 100, 0));
 
   double knots[] = {0, 0, 0, 0, 1, 2, 3, 3, 3, 3};
   double weights[] = {1, 1, 5, 1, 6, 1};
@@ -159,7 +155,6 @@ void cbRender()
   if(bk != NULL) bk->render();
   if(bw != NULL) bw->render();
   if(bb != NULL) bb->render();
-  if(bc != NULL) bc->render();
 
   glfwSwapBuffers();
 }
@@ -191,7 +186,6 @@ void cleanup()
   if(bk != NULL) delete bk;
   if(bw != NULL) delete bw;
   if(bb != NULL) delete bb;
-  if(bc != NULL) delete bc;
   glfwTerminate();
   exit(0);
 }

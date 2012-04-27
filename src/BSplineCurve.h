@@ -10,9 +10,9 @@
 
 #include <vector>
 #include <cstring>
+#include <CoreMath/Vector4.hpp>
 
 #include "main.h"
-#include "Point.h"
 
 class BSplineCurve
 {
@@ -21,8 +21,8 @@ private:
   int m_degree;
   double* m_knotVector;
   double* m_weights;
-  std::vector<Point*> m_controlPoints;
-  std::vector<Point*> m_renderPoints;
+  std::vector<CoreMath::Vector4> m_controlPoints;
+  std::vector<CoreMath::Vector4> m_renderPoints;
   double m_color[4];
 
   /**
@@ -51,7 +51,7 @@ public:
   BSplineCurve(int _m, int degree);
   ~BSplineCurve();
 
-  inline std::vector<Point*> getControlPoints()
+  inline std::vector<CoreMath::Vector4> getControlPoints()
   {
     return m_controlPoints;
   }
@@ -66,7 +66,7 @@ public:
     return m_weights;
   }
   
-  inline void setControlPoints(std::vector<Point*> controlPoints)
+  inline void setControlPoints(std::vector<CoreMath::Vector4> controlPoints)
   {
     if(!controlPoints.empty())
       m_controlPoints = controlPoints;

@@ -27,10 +27,10 @@ void BezierCurve::generateCurve()
     double acc_x = 0.0;
     double acc_y = 0.0;
     for(int i = 0; i <= DEGREE; i++) {
-      acc_x += m_controlPoints[i]->x * B(i, DEGREE, u);
-      acc_y += m_controlPoints[i]->y * B(i, DEGREE, u);
+      acc_x += m_controlPoints[i][0] * B(i, DEGREE, u);
+      acc_y += m_controlPoints[i][1] * B(i, DEGREE, u);
     }
-    m_renderPoints.push_back(new Point(acc_x, acc_y, 0.0));
+    m_renderPoints.push_back(CoreMath::Vector4(acc_x, acc_y, 0.0));
   }
 }
 
@@ -40,8 +40,8 @@ void BezierCurve::render()
   glColor4f(0.5, 0.0, 0.7, 0.0);
   glBegin(GL_LINES);
   for(unsigned int i = 1; i < m_renderPoints.size(); i++) {
-    glVertex2f(m_renderPoints[i]->x, m_renderPoints[i]->y);
-    glVertex2f(m_renderPoints[i - 1]->x, m_renderPoints[i - 1]->y);
+    glVertex2f(m_renderPoints[i][0], m_renderPoints[i][1]);
+    glVertex2f(m_renderPoints[i - 1][0], m_renderPoints[i - 1][1]);
   }
   glEnd();
 }

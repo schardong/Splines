@@ -8,9 +8,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
+#include <GL/glfw.h>
 #include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
 
 #include "BSplineSurface.h"
 
@@ -42,14 +41,14 @@ BSplineSurface::~BSplineSurface() {
 void BSplineSurface::generateSurface() {
     if(m_renderPoints.empty() == false)
         m_renderPoints.clear();
-    for(int segmentU = 0; segmentU <= m; segmentU++) {
-        for(int segmentV = 0; segmentV <= n; segmentV++) {
-            for(double u = m_knotVectorU[segmentU]; u <= m_knotVectorU[segmentU + 1]; u += INC) {
-                for(double v = m_knotVectorV[segmentV]; u <= m_knotVectorV[segmentV + 1]; v += INC) {
-                }
-            }
-        }
-    }
+    // for(int segmentU = 0; segmentU <= m; segmentU++) {
+    //     for(int segmentV = 0; segmentV <= n; segmentV++) {
+    //         for(double u = m_knotVectorU[segmentU]; u <= m_knotVectorU[segmentU + 1]; u += INC) {
+    //             for(double v = m_knotVectorV[segmentV]; u <= m_knotVectorV[segmentV + 1]; v += INC) {
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 void BSplineSurface::render() {

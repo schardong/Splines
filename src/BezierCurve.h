@@ -10,16 +10,16 @@
 
 #include <vector>
 #include <cmath>
+#include <CoreMath/Vector4.hpp>
 
 #include "main.h"
-#include "Point.h"
 
 class BezierCurve
 {
 private:
   int m_degree;
-  std::vector<Point*> m_controlPoints;
-  std::vector<Point*> m_renderPoints;
+  std::vector<CoreMath::Vector4> m_controlPoints;
+  std::vector<CoreMath::Vector4> m_renderPoints;
 
   double fatorial(int n)
   {
@@ -41,12 +41,12 @@ public:
   BezierCurve(int degree);
   ~BezierCurve();
 
-  std::vector<Point*> getContolPoints()
+  std::vector<CoreMath::Vector4> getContolPoints()
   {
     return m_controlPoints;
   }
 
-  inline void setControlPoints(std::vector<Point*> controlPoints)
+  inline void setControlPoints(std::vector<CoreMath::Vector4> controlPoints)
   {
     m_controlPoints = controlPoints;
   }
