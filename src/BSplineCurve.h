@@ -14,8 +14,7 @@
 
 #include "main.h"
 
-class BSplineCurve
-{
+class BSplineCurve {
 private:
   int m;
   int m_degree;
